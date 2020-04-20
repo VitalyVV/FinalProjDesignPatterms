@@ -1,9 +1,9 @@
-public final class Task {
+public final class TaskOriginal {
     private final long id;
     private final String description;
     private boolean done;
 
-    public Task(long id, String description, boolean done) {
+    public TaskOriginal(long id, String description, boolean done) {
         this.id = id;
         this.description = description;
         this.done = done;

@@ -7,10 +7,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class TaskList implements Runnable {
+public final class TaskListOriginal implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final Map<String, List<TaskOriginal>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -19,10 +19,10 @@ public final class TaskList implements Runnable {
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new TaskList(in, out).run();
+        new TaskListOriginal(in, out).run();
     }
 
-    public TaskList(BufferedReader reader, PrintWriter writer) {
+    public TaskListOriginal(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
     }
@@ -70,9 +70,9 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+        for (Map.Entry<String, List<TaskOriginal>> project : tasks.entrySet()) {
             out.println(project.getKey());
-            for (Task task : project.getValue()) {
+            for (TaskOriginal task : project.getValue()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
             out.println();
@@ -91,17 +91,17 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new ArrayList<Task>());
+        tasks.put(name, new ArrayList<TaskOriginal>());
     }
 
     private void addTask(String project, String description) {
-        List<Task> projectTasks = tasks.get(project);
+        List<TaskOriginal> projectTasks = tasks.get(project);
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        projectTasks.add(new TaskOriginal(nextId(), description, false));
     }
 
     private void check(String idString) {
@@ -114,8 +114,8 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            for (Task task : project.getValue()) {
+        for (Map.Entry<String, List<TaskOriginal>> project : tasks.entrySet()) {
+            for (TaskOriginal task : project.getValue()) {
                 if (task.getId() == id) {
                     task.setDone(done);
                     return;

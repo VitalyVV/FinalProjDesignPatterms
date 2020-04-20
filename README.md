@@ -3,11 +3,11 @@
 
 ## Refamctoring the code
 
-1. Refactor class Task for a composition;
+1. Refactor class TaskOriginal for a composition;
 1. Put input output into a Context;
 2. Command pattern for Action;
 4. Fabric for Projects;
-5. Connect Action and Task via Mediator;
+5. Connect Action and TaskOriginal via Mediator;
 
 ## Add functionality support
 1. Deadlines;
