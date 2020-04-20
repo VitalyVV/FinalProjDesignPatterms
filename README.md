@@ -22,3 +22,10 @@
 4. Allow a task to "belong" to several projects at the same time (if checked in one, checked in all for example)
 4. Ensure that the application permanently maintains 2 task lists per project: the "checked" and the "unchecked"
 4. (Be careful this one is tricky) Make sure that a task can be itself a task list
+
+
+## Meetings logs
+Task + Fabric doing SkarletSkay
+Mediator + Action(Command) do Vitaly
+
+Furtmsday is deadline.
