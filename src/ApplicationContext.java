@@ -26,8 +26,13 @@ public class ApplicationContext {
         this.out = out;
     }
 
+    public TaskAgency getTaskAgency(){
+        return taskAgency;
+    }
+
     private static ApplicationContext instance;
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private PrintWriter out = new PrintWriter(System.out);
+    private TaskAgency taskAgency = new TaskAgency();
 
 }
