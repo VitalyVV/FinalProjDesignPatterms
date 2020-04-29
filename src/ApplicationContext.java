@@ -1,7 +1,8 @@
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ApplicationContext {
 
@@ -26,8 +27,26 @@ public class ApplicationContext {
         this.out = out;
     }
 
+    public void addCommand(Command command){
+        commands.add(command);
+    }
+
+    public void addProject(Project project){
+        projects.add(project);
+    }
+
+    public ArrayList<Command> getCommands(){
+        return new ArrayList<Command>(commands);
+    }
+
+    public ArrayList<Project> getProjects() {
+        return new ArrayList<Project>(projects);
+    }
+
     private static ApplicationContext instance;
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private PrintWriter out = new PrintWriter(System.out);
+    HashSet<Project> projects = new HashSet<>();
+    HashSet<Command> commands = new HashSet<>();
 
 }

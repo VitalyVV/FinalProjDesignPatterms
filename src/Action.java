@@ -12,6 +12,5 @@ public class Action {
         if (command == null) {
             throw new IllegalStateException("no command registered for " + commandName);
         }
-        command.execute();
     }
 }

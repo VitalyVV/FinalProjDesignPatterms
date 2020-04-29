@@ -1,5 +1,5 @@
 public class Task implements TaskComponent{
-    long id;
+    long id;  // Shouldnt be static?
     String description;
     boolean done;
 

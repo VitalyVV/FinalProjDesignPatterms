@@ -27,5 +27,3 @@
 ## Meetings logs
 Task + Fabric doing SkarletSkay
 Mediator + Action(Command) do Vitaly
-
-Furtmsday is deadline.
