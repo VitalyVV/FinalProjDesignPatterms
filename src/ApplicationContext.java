@@ -43,10 +43,23 @@ public class ApplicationContext {
         return new ArrayList<Project>(projects);
     }
 
+    public Project getProjectByName(String name){
+        for (Project pj : projects) {
+            if(pj.getName().equals(name)){
+                return pj;
+            }
+        }
+        return null;
+    }
+
+    public Mediator getMediator(){
+        return taskMediator;
+    }
+
     private static ApplicationContext instance;
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private PrintWriter out = new PrintWriter(System.out);
-    HashSet<Project> projects = new HashSet<>();
-    HashSet<Command> commands = new HashSet<>();
-
+    private HashSet<Project> projects = new HashSet<>();
+    private HashSet<Command> commands = new HashSet<>();
+    private Mediator taskMediator = new TaskMediator();
 }

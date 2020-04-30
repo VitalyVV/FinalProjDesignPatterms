@@ -50,7 +50,6 @@ public class Project {
     public void addTask(Task task){
         commands.add(task);
         mediator.add(task, this);
-
     }
 
     public void addTask(long id, String description){

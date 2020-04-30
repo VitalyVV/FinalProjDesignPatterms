@@ -1,12 +1,12 @@
 public class Application {
 
     private ApplicationContext context = ApplicationContext.getInstance();
-    private Mediator taskMediator = new TaskMediator();
+
 
     public Application() {
         context.addCommand(new HelpCommand());
         context.addCommand(new ErrorCommand());
-        context.addCommand(new AddProjectCommand(taskMediator));
+        context.addCommand(new AddProjectCommand(context.getMediator()));
     }
 
     public void run(){
@@ -14,4 +14,5 @@ public class Application {
             break;
         }
     }
+
 }

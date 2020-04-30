@@ -22,6 +22,6 @@ public class AddProjectCommand implements Command {
 
     @Override
     public String description() {
-        return "Add new project by: \"add project `name` `dd mm yy`\"";
+        return "Add new project: Use add project <name>.\"";
     }
 }

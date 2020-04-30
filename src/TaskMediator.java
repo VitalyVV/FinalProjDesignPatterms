@@ -28,6 +28,12 @@ public class TaskMediator implements Mediator {
     }
 
     @Override
+    public void addTask(Task task, Project project){
+        taskMap.put(task, new ArrayList<>());
+        if (project != null) taskMap.get(task).add(project);
+    }
+
+    @Override
     public void check(Task task) {
         task.setDone(true); // Awkward but ok
     }
