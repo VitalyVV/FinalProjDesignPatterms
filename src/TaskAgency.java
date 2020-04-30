@@ -21,6 +21,14 @@ public class TaskAgency {
         }
     }
 
+    public Project[] getProjects(){
+        return projects.values().toArray(new Project[0]);
+    }
+
+    public Project getProject(String name){
+        return projects.get(name);
+    }
+
     public Task findTaskById(long id){
         Task t;
         for(Project p: projects.values()){

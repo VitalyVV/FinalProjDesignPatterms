@@ -18,5 +18,8 @@ public class Project {
             if(t.getId() == id) return t;
         return null;
     }
+    public Task[] getTasks(){
+        return taskList.toArray(new Task[0]);
+    }
 
 }
