@@ -1,25 +1,36 @@
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+
 
 public class Project {
-    private List<Task> commands = new ArrayList<>();
-    private Mediator mediator;
-    private Calendar deadline;
-    private String name;
 
+    private String name;
+    private ArrayList<Task> taskList = new ArrayList<>();
+
+    public Project(String name){
+        this.name = name;
+        mediator = null; 
+    }
+
+    public void addTask(Task task){
+        taskList.add(task);
+    }
+
+    public Task getTask(long id){
+        for(Task t: taskList)
+            if(t.getId() == id) return t;
+        return null;
+    }
+    public Task[] getTasks(){
+        return taskList.toArray(new Task[0]);
+    }
+    
     public Calendar getDeadline() {
         return deadline;
     }
+    
+    private Mediator mediator;
+    private Calendar deadline;
 
-    public String getName() {
-        return name;
-    }
-
-    public Project(Mediator mediator) {
-        this.mediator = mediator;
-    }
 
     /**
      * Expecting to have dd mm yy.
@@ -41,19 +52,5 @@ public class Project {
         deadline = datetime;
         return this;
     }
-
-    public Project addName(String name){
-        this.name = name;
-        return this;
-    }
-
-    public void addTask(Task task){
-        commands.add(task);
-        mediator.add(task, this);
-    }
-
-    public void addTask(long id, String description){
-        Task task = new Task(id, description, false);
-        this.addTask(task);
-    }
+    
 }
