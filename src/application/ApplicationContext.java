@@ -1,8 +1,13 @@
+package application;
+
+import commands.Command;
+import mediator.Mediator;
+import mediator.TaskMediator;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 public class ApplicationContext {
 
@@ -27,29 +32,11 @@ public class ApplicationContext {
         this.out = out;
     }
 
-
-    public TaskAgency getTaskAgency() {
-        return taskAgency;
+    void addCommand(String commandName, Command command){
+        commands.put(commandName, command);
     }
-
-    public void addCommand(Command command){
-        commands.add(command);
-    }
-
-    public void addProject(Project project){
-        projects.add(project);
-    }
-
-    public ArrayList<Command> getCommands(){
-        return new ArrayList<Command>(commands);
-    }
-
-    public ArrayList<Project> getProjects() {
-        return new ArrayList<Project>(projects);
-    }
-
-    public Project getProjectByName(String name){
-        return ApplicationContext.getInstance().taskAgency.getProject(name);
+    public Set<Map.Entry<String, Command>> getCommands(){
+        return commands.entrySet();
     }
 
     public Mediator getMediator(){
@@ -59,9 +46,7 @@ public class ApplicationContext {
     private static ApplicationContext instance;
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private PrintWriter out = new PrintWriter(System.out);
-    private TaskAgency taskAgency = new TaskAgency();
 
-    private HashSet<Project> projects = new HashSet<>();
-    private HashSet<Command> commands = new HashSet<>();
+    private HashMap<String, Command> commands = new HashMap<>();
     private Mediator taskMediator = new TaskMediator();
 }

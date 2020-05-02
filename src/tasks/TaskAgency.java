@@ -1,23 +1,35 @@
-import java.util.ArrayList;
+package tasks;
+
+import mediator.Mediator;
+import tasks.Project;
+import tasks.Task;
+import tasks.TaskFactory;
+
 import java.util.HashMap;
 
 public class TaskAgency {
 
-    //private ArrayList<Project> projects = new ArrayList<>();
+    //private ArrayList<tasks.Project> projects = new ArrayList<>();
     private HashMap<String, Project> projects = new HashMap<>();
 
-    public void addNewProject(String name, Mediator mediator){
-        projects.put(name, new Project(name, mediator));
+    public void addNewProject(Mediator mediator, String name){
+        projects.put(name, new Project(mediator, name));
     }
 
     public void addNewTask(String projectName, String description){
-        projects.get(projectName).addTask(TaskFactory.getNewTask(description, false));
+        projects.get(projectName).addTask(TaskFactory.createNewTask(description));
+    }
+
+    public void removeTask(long id){
+        for(Project p: projects.values()){
+            p.removeTask(id);
+        }
     }
 
     public void addNewSubTask(long id, String description){
         Task t = findTaskById(id);
         if(t != null){
-            t.addTask(TaskFactory.getNewTask(description, false));
+            t.addTask(TaskFactory.createNewTask(description));
         }
     }
 

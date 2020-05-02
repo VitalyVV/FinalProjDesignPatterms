@@ -1,3 +1,10 @@
+package commands;
+
+import application.Application;
+import application.ApplicationContext;
+import mediator.Mediator;
+import tasks.Project;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -5,13 +12,7 @@ import java.util.GregorianCalendar;
 public class TodayCommand implements Command {
     @Override
     public void execute(String command) {
-        ArrayList<Project> projects = ApplicationContext.getInstance().getProjects();
-        Calendar today = new GregorianCalendar();
-        for (Project pj: projects) {
-            if (pj.getDeadline().compareTo(today)==0){
-                // some printing of this
-            }
-        }
+        ApplicationContext.getInstance().getMediator().notify(this, command);
     }
 
     @Override

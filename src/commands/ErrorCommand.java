@@ -1,3 +1,5 @@
+package commands;
+
 public class ErrorCommand implements Command {
 
     @Override
