@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class Project {
@@ -6,9 +8,9 @@ public class Project {
     private String name;
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    public Project(String name){
+    public Project(String name, Mediator mediator){
         this.name = name;
-        mediator = null; 
+        this.mediator = mediator;
     }
 
     public void addTask(Task task){

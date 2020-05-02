@@ -13,9 +13,8 @@ public class AddProjectCommand implements Command {
         if (commandParts.length>3){
             date = String.join(" ", new String[]{commandParts[3], commandParts[4], commandParts[5]});
         }
-        Project project = new Project(projectsMediator)
-                .addDeadline(date)
-                .addName(name);
+        Project project = new Project(name,projectsMediator)
+                .addDeadline(date);
 
         ApplicationContext.getInstance().addProject(project);
     }

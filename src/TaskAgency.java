@@ -6,8 +6,8 @@ public class TaskAgency {
     //private ArrayList<Project> projects = new ArrayList<>();
     private HashMap<String, Project> projects = new HashMap<>();
 
-    public void addNewProject(String name){
-        projects.put(name, new Project(name));
+    public void addNewProject(String name, Mediator mediator){
+        projects.put(name, new Project(name, mediator));
     }
 
     public void addNewTask(String projectName, String description){

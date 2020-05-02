@@ -28,8 +28,9 @@ public class ApplicationContext {
     }
 
 
-    public TaskAgency getTaskAgency(){
+    public TaskAgency getTaskAgency() {
         return taskAgency;
+    }
 
     public void addCommand(Command command){
         commands.add(command);
@@ -48,12 +49,7 @@ public class ApplicationContext {
     }
 
     public Project getProjectByName(String name){
-        for (Project pj : projects) {
-            if(pj.getName().equals(name)){
-                return pj;
-            }
-        }
-        return null;
+        return ApplicationContext.getInstance().taskAgency.getProject(name);
     }
 
     public Mediator getMediator(){
