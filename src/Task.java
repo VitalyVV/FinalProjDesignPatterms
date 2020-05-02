@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Task {
@@ -6,6 +7,7 @@ public class Task {
     private boolean done;
 
     private ArrayList<Task> subTasks = new ArrayList<>();
+
 
     public Task(long id, String description, boolean done) {
         this.id = id;

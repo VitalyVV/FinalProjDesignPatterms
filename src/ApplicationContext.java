@@ -1,7 +1,8 @@
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ApplicationContext {
 
@@ -26,8 +27,37 @@ public class ApplicationContext {
         this.out = out;
     }
 
+
     public TaskAgency getTaskAgency(){
         return taskAgency;
+
+    public void addCommand(Command command){
+        commands.add(command);
+    }
+
+    public void addProject(Project project){
+        projects.add(project);
+    }
+
+    public ArrayList<Command> getCommands(){
+        return new ArrayList<Command>(commands);
+    }
+
+    public ArrayList<Project> getProjects() {
+        return new ArrayList<Project>(projects);
+    }
+
+    public Project getProjectByName(String name){
+        for (Project pj : projects) {
+            if(pj.getName().equals(name)){
+                return pj;
+            }
+        }
+        return null;
+    }
+
+    public Mediator getMediator(){
+        return taskMediator;
     }
 
     private static ApplicationContext instance;
@@ -35,4 +65,7 @@ public class ApplicationContext {
     private PrintWriter out = new PrintWriter(System.out);
     private TaskAgency taskAgency = new TaskAgency();
 
+    private HashSet<Project> projects = new HashSet<>();
+    private HashSet<Command> commands = new HashSet<>();
+    private Mediator taskMediator = new TaskMediator();
 }
