@@ -76,4 +76,16 @@ public class Task {
         }
     }
 
+    public String listTasks(int depth){
+        StringBuilder builder = new StringBuilder();
+        for(int  i = 0; i < depth; i++){
+            builder.append("  ");
+        }
+        builder.append("[").append(isDone()?"x":"").append("] ").append(description).append("\n");
+        for (Task sub:subTasks) {
+            builder.append(sub.listTasks(depth+1));
+        }
+        return builder.toString();
+    }
+
 }

@@ -60,7 +60,7 @@ public class TaskMediator implements Mediator {
                     else add(params[1], params[2], null);
                     break;
                 case "show":
-                    taskAgency.showTasks();
+                    taskAgency.listTasks();
                     break;
             }
         }else if(sender instanceof TaskAgency){

@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class TaskAgency {
 
-    //private ArrayList<tasks.Project> projects = new ArrayList<>();
     private HashMap<String, Project> projects = new HashMap<>();
 
     public void addNewProject(Mediator mediator, String name){
@@ -52,16 +51,12 @@ public class TaskAgency {
         return null;
     }
 
-    public void showTasks(){
+    public void listTasks(){
         StringBuilder builder = new StringBuilder("list ");
         for (Map.Entry<String, Project> p : projects.entrySet()) {
             builder.append(p.getKey()).append("\n");
             for(Task t :p.getValue().getTasks()){
-                builder.append("  [").append(t.isDone() ? "x" : "").append("]").append(t.getDescription()).append("\n");
-//                for(Task st : t.getSubTasks()) {
-//                    builder.append("    [").append(st.isDone() ? "x" : "").append("]").
-//                            append(st.getDescription()).append("\n");
-//                }
+                builder.append(t.listTasks(1));
             }
         }
         ApplicationContext.getInstance().getMediator().notify(this, builder.toString());
