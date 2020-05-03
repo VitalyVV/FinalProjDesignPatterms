@@ -73,14 +73,16 @@ public class Task {
         }
     }
 
-    public String listTasks(int depth){
+    public String listTasks(int depth, boolean showId){
         StringBuilder builder = new StringBuilder();
         for(int  i = 0; i < depth; i++){
             builder.append("  ");
         }
-        builder.append("[").append(isDone()?"x":"").append("] ").append(description).append("\n");
+        builder.append("[").append(isDone()?"x":"").append("] ").append(description);
+        if(showId) builder.append("(id:").append(id).append(")");
+        builder.append("\n");
         for (Task sub:subTasks) {
-            builder.append(sub.listTasks(depth+1));
+            builder.append(sub.listTasks(depth+1, showId));
         }
         return builder.toString();
     }

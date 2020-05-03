@@ -103,7 +103,7 @@ public final class TaskListOriginal implements Runnable {
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        //projectTasks.add(new Task(nextId(), description, false));
     }
 
     private void check(String idString) {

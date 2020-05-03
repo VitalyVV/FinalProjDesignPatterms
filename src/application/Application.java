@@ -10,16 +10,15 @@ import java.util.HashMap;
 
 public class Application {
 
-    //TODO: parameter error message
-
     public Application() {
         ApplicationContext context = ApplicationContext.getInstance();
         context.addCommand("add", new AddCommand());
         context.addCommand("show", new ShowCommand());
         context.addCommand("check", new CheckCommand());
         context.addCommand("uncheck", new UncheckCommand());
-        context.addCommand("help", new HelpCommand());
         context.addCommand("deadline", new DeadlineCommand());
+        context.addCommand("remove", new RemoveCommand());
+        context.addCommand("help", new HelpCommand());
         context.addCommand("err", new ErrorCommand());
     }
 

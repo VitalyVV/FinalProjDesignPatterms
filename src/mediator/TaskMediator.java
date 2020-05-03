@@ -38,17 +38,6 @@ public class TaskMediator implements Mediator {
                 else
                     add(params[1], params[2], null);
                 break;
-            case "show":
-                taskAgency.listTasks();
-                break;
-            default:
-                parseUnary(params);
-                break;
-        }
-    }
-
-    private void parseUnary(String[] params){
-        switch (params[0]) {
             case "deadline":
                 taskAgency.addDeadline(Long.parseLong(params[1]), params[2]);
                 break;
@@ -62,7 +51,7 @@ public class TaskMediator implements Mediator {
                 uncheckTask(Long.parseLong(params[1]));
                 break;
             case "show":
-                showTask();
+                showTask(params.length>3 && params[2].equals("ids"));
                 break;
         }
     }
@@ -105,8 +94,8 @@ public class TaskMediator implements Mediator {
         taskAgency.setTaskDone(id, true);
     }
 
-    public void showTask(){
-        taskAgency.listTasks();
+    public void showTask(boolean showId){
+        taskAgency.listTasks(showId);
     }
 
     public void uncheckTask(long id){

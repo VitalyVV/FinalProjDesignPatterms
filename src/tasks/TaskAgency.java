@@ -61,14 +61,15 @@ public class TaskAgency {
         return null;
     }
 
-    public void listTasks(){
+    public void listTasks(boolean showId){
         StringBuilder builder = new StringBuilder("list ");
         for (Map.Entry<String, Project> p : projects.entrySet()) {
             builder.append(p.getKey()).append("\n");
             for(Task t :p.getValue().getTasks()){
-                builder.append(t.listTasks(1));
+                builder.append(t.listTasks(1, showId));
             }
         }
         ApplicationContext.getInstance().getMediator().notify(this, builder.toString());
     }
+
 }
