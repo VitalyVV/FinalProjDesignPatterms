@@ -1,8 +1,6 @@
 package mediator;
 
-import commands.AddProjectCommand;
 import commands.Command;
-import mediator.Mediator;
 import tasks.Project;
 import tasks.Task;
 import tasks.TaskAgency;

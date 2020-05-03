@@ -1,10 +1,11 @@
-package commands;
+package commands.tasks;
 
 import application.ApplicationContext;
+import commands.Command;
 import tasks.Project;
 import tasks.Task;
 
-public class AddTaskCommand implements Command{
+public class AddTaskCommand implements Command {
     @Override
     public void execute(String command) {
         ApplicationContext.getInstance().getMediator().notify(this, command);

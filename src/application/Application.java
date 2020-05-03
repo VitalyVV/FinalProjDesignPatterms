@@ -1,6 +1,9 @@
 package application;
 
 import commands.*;
+import commands.ErrorCommand;
+import commands.HelpCommand;
+import commands.tasks.AddTaskCommand;
 
 import java.io.IOException;
 import java.util.Map;
