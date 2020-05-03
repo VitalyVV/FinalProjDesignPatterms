@@ -1,6 +1,6 @@
 package commands.tasks;
 
-public class ShowCommand extends TaskCommand  {
+public class AddCommand extends TaskCommand{
     @Override
     public String description() {
         return null;
