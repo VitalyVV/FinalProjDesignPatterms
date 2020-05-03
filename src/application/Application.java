@@ -10,6 +10,15 @@ import java.util.Map;
 
 public class Application {
 
+    //TODO: check
+    //TODO: uncheck
+    //TODO: deadlines
+    //TODO: removal
+    //TODO: fix descriptions
+    //TODO: parameter error message
+    //TODO: not found message
+    //TODO: id-task output
+
     public Application() {
         ApplicationContext context = ApplicationContext.getInstance();
         context.addCommand("add", new AddCommand());
@@ -17,6 +26,8 @@ public class Application {
         context.addCommand("check", new CheckCommand());
         context.addCommand("uncheck", new UncheckCommand());
         context.addCommand("help", new HelpCommand());
+
+        //Todo something with err command
         context.addCommand("err", new ErrorCommand());
     }
 

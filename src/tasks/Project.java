@@ -10,11 +10,9 @@ public class Project {
 
     private String name;
     private ArrayList<Task> taskList = new ArrayList<>();
-    private Mediator mediator;
 
-    public Project(Mediator mediator, String name){
+    public Project(String name){
         this.name = name;
-        this.mediator = mediator;
     }
 
     public String getName(){

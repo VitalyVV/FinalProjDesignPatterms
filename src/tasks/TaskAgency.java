@@ -13,14 +13,15 @@ public class TaskAgency {
 
     private HashMap<String, Project> projects = new HashMap<>();
 
-    public void addNewProject(Mediator mediator, String name){
-        projects.put(name, new Project(mediator, name));
+    public void addNewProject(String name){
+        projects.put(name, new Project(name));
     }
 
     public void addNewTask(String projectName, String description){
         projects.get(projectName).addTask(TaskFactory.createNewTask(description));
     }
 
+    //ToDo task removal
     public void removeTask(long id){
         for(Project p: projects.values()){
             p.removeTask(id);

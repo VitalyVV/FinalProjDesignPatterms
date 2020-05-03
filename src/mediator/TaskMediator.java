@@ -19,35 +19,37 @@ public class TaskMediator implements Mediator {
 
     private final static HashMap<Task, List<Project>> taskMap = new HashMap<>();
 
-    @Override
-    public void delete(Task task, Project project) {
-        List<Project> projects = taskMap.get(task);
-        projects.remove(project);
-        taskMap.replace(task, projects);
-    }
+//    TODO: clear the class
+//    @Override
+//    public void delete(Task task, Project project) {
+//        List<Project> projects = taskMap.get(task);
+//        projects.remove(project);
+//        taskMap.replace(task, projects);
+//    }
+//
+//    @Override
+//    public void add(Task task, Project project) {
+//        if(taskMap.containsKey(task)){
+//            taskMap.get(task).add(project);
+//        }else{
+//            taskMap.put(
+//                    task,
+//                    new ArrayList<Project>(Collections.singletonList(project)));
+//        }
+//    }
+//
+//    @Override
+//    public void addTask(Task task, Project project){
+//        taskMap.put(task, new ArrayList<>());
+//        if (project != null) taskMap.get(task).add(project);
+//    }
+//
+//    @Override
+//    public void check(Task task) {
+//        task.setDone(true); // Awkward but ok
+//    }
 
-    @Override
-    public void add(Task task, Project project) {
-        if(taskMap.containsKey(task)){
-            taskMap.get(task).add(project);
-        }else{
-            taskMap.put(
-                    task,
-                    new ArrayList<Project>(Collections.singletonList(project)));
-        }
-    }
-
-    @Override
-    public void addTask(Task task, Project project){
-        taskMap.put(task, new ArrayList<>());
-        if (project != null) taskMap.get(task).add(project);
-    }
-
-    @Override
-    public void check(Task task) {
-        task.setDone(true); // Awkward but ok
-    }
-
+    //TODO: to divide this part into smaller ones
     @Override
     public void notify(Object sender, String data) {
         String[] params;
@@ -88,7 +90,7 @@ public class TaskMediator implements Mediator {
 
 
     public void addProject(String name){
-        taskAgency.addNewProject(this, name);
+        taskAgency.addNewProject(name);
     }
 
     public void addTask(String description, String projectName){
