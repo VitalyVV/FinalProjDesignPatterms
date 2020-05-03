@@ -1,10 +1,6 @@
 package tasks;
 
 import application.ApplicationContext;
-import mediator.Mediator;
-import tasks.Project;
-import tasks.Task;
-import tasks.TaskFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +17,6 @@ public class TaskAgency {
         projects.get(projectName).addTask(TaskFactory.createNewTask(description));
     }
 
-    //ToDo task removal
     public void removeTask(long id){
         for(Project p: projects.values()){
             p.removeTask(id);
@@ -41,6 +36,20 @@ public class TaskAgency {
 
     public Project getProject(String name){
         return projects.get(name);
+    }
+
+    public void setTaskDone(long id, boolean isDone){
+        Task t = findTaskById(id);
+        if(t != null){
+            t.setDone(isDone);
+        }
+    }
+
+    public void addDeadline(long id, String deadline){
+        Task t = findTaskById(id);
+        if(t != null){
+            t.setDeadline(deadline);
+        }
     }
 
     public Task findTaskById(long id){

@@ -12,13 +12,6 @@ public class Task {
 
     private ArrayList<Task> subTasks = new ArrayList<>();
 
-    //TODO: delete this constructor
-    public Task(long id, String description, boolean done) {
-        this.id = id;
-        this.description = description;
-        this.done = done;
-    }
-
     Task(long id, String description) {
         this.id = id;
         this.description = description;
@@ -55,9 +48,12 @@ public class Task {
         return null;
     }
 
-    //ToDo set deadllnes
+    /**
+     *
+     * @param date - Deadline in form dd.mm.yy, else error is unavoidable.
+     */
     public void setDeadline(String date){
-        String[] temp = date.split(" ");
+        String[] temp = date.split(".");
         Calendar datetime = new GregorianCalendar();
         datetime.set(Calendar.YEAR, Integer.parseInt(temp[2]));
         datetime.set(Calendar.MONTH, Integer.parseInt(temp[1]));
@@ -69,7 +65,6 @@ public class Task {
         this.done = done;
         for(Task task: subTasks)
             task.setDone(done);
-
     }
 
     public void removeSubTask(long id){

@@ -24,6 +24,16 @@ public class ApplicationContext {
         this.in = in;
     }
 
+    public void writeln(String s) {
+        out.println(s);
+        out.flush();
+    }
+
+    public void write(String s) {
+        out.print(s);
+        out.flush();
+    }
+
     public PrintWriter getOut() {
         return out;
     }
@@ -35,8 +45,8 @@ public class ApplicationContext {
     void addCommand(String commandName, Command command){
         commands.put(commandName, command);
     }
-    public Set<Map.Entry<String, Command>> getCommands(){
-        return commands.entrySet();
+    public HashMap<String, Command> getCommands(){
+        return commands;
     }
 
     public Mediator getMediator(){

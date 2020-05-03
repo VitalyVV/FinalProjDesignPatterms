@@ -1,23 +1,16 @@
 package application;
 
-import commands.*;
+import commands.Command;
 import commands.ErrorCommand;
 import commands.HelpCommand;
 import commands.tasks.*;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.HashMap;
 
 public class Application {
 
-    //TODO: check
-    //TODO: uncheck
-    //TODO: deadlines
-    //TODO: removal
-    //TODO: fix descriptions
     //TODO: parameter error message
-    //TODO: not found message
-    //TODO: id-task output
 
     public Application() {
         ApplicationContext context = ApplicationContext.getInstance();
@@ -26,15 +19,13 @@ public class Application {
         context.addCommand("check", new CheckCommand());
         context.addCommand("uncheck", new UncheckCommand());
         context.addCommand("help", new HelpCommand());
-
-        //Todo something with err command
+        context.addCommand("deadline", new DeadlineCommand());
         context.addCommand("err", new ErrorCommand());
     }
 
     public void run(){
         while(true){
-            ApplicationContext.getInstance().getOut().print("> ");
-            ApplicationContext.getInstance().getOut().flush();
+            ApplicationContext.getInstance().write("> ");
             String command;
             try {
                 command = ApplicationContext.getInstance().getIn().readLine();
@@ -49,17 +40,18 @@ public class Application {
 
     private void router(String command){
         String[] params = command.split(" ", 2);
-        Command error = null;
+        HashMap<String, Command> commands = ApplicationContext.getInstance().getCommands();
+        Command c = commands.getOrDefault(params[0], null);
 
-        for(Map.Entry<String, Command> c: ApplicationContext.getInstance().getCommands()){
-            if(c.getKey().equals(params[0])) {
-                c.getValue().execute(command);
-                return;
+        if (c != null){
+            try{
+                c.execute(command);
+            }catch (ArrayIndexOutOfBoundsException e){
+                commands.get("err").execute(command);
             }
-            if(c.getKey().equals("err")) error = c.getValue();
+        }else{
+            commands.get("err").execute(command);
         }
-        if(error != null)
-            error.execute(command);
     }
 
 }
