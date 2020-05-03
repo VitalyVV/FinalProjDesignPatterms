@@ -3,7 +3,7 @@ package application;
 import commands.*;
 import commands.ErrorCommand;
 import commands.HelpCommand;
-import commands.tasks.AddTaskCommand;
+import commands.tasks.*;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,9 +12,12 @@ public class Application {
 
     public Application() {
         ApplicationContext context = ApplicationContext.getInstance();
+        context.addCommand("add", new AddCommand());
+        context.addCommand("show", new ShowCommand());
+        context.addCommand("check", new CheckCommand());
+        context.addCommand("uncheck", new UncheckCommand());
         context.addCommand("help", new HelpCommand());
         context.addCommand("err", new ErrorCommand());
-        context.addCommand("add", new AddTaskCommand());
     }
 
     public void run(){
