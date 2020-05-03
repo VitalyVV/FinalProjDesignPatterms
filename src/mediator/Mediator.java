@@ -10,5 +10,5 @@ public interface Mediator {
     public void addTask(Task task, Project project);
     public void check(Task task);
 
-    void notify(Command object, String data);
+    void notify(Object object, String data);
 }

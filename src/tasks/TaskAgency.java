@@ -1,11 +1,13 @@
 package tasks;
 
+import application.ApplicationContext;
 import mediator.Mediator;
 import tasks.Project;
 import tasks.Task;
 import tasks.TaskFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class TaskAgency {
 
@@ -48,5 +50,20 @@ public class TaskAgency {
              if(t != null) return t;
         }
         return null;
+    }
+
+    public void showTasks(){
+        StringBuilder builder = new StringBuilder("list ");
+        for (Map.Entry<String, Project> p : projects.entrySet()) {
+            builder.append(p.getKey()).append("\n");
+            for(Task t :p.getValue().getTasks()){
+                builder.append("  [").append(t.isDone() ? "x" : "").append("]").append(t.getDescription()).append("\n");
+//                for(Task st : t.getSubTasks()) {
+//                    builder.append("    [").append(st.isDone() ? "x" : "").append("]").
+//                            append(st.getDescription()).append("\n");
+//                }
+            }
+        }
+        ApplicationContext.getInstance().getMediator().notify(this, builder.toString());
     }
 }

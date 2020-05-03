@@ -1,5 +1,6 @@
 package mediator;
 
+import application.ApplicationContext;
 import commands.Command;
 import tasks.Project;
 import tasks.Task;
@@ -48,14 +49,26 @@ public class TaskMediator implements Mediator {
     }
 
     @Override
-    public void notify(Command command, String data) {
-        String[] params = data.split(" ");
-        switch (params[0]){
-            case "add":
-                if (params.length>3)
-                    add(params[1], params[3], params[2]);
-                else add(params[1], params[2], null);
-                break;
+    public void notify(Object sender, String data) {
+        String[] params;
+        if (sender instanceof Command) {
+            params = data.split(" ");
+            switch (params[0]) {
+                case "add":
+                    if (params.length > 3)
+                        add(params[1], params[3], params[2]);
+                    else add(params[1], params[2], null);
+                    break;
+                case "show":
+                    taskAgency.showTasks();
+                    break;
+            }
+        }else if(sender instanceof TaskAgency){
+            params = data.split(" ", 2);
+            if(params[0].equals("list")){
+                ApplicationContext.getInstance().getOut().println(params[1]);
+                ApplicationContext.getInstance().getOut().flush();
+            }
         }
     }
 
@@ -71,8 +84,8 @@ public class TaskMediator implements Mediator {
                 addSubTask(title, Long.parseLong(parent));
                 break;
         }
-
     }
+
 
     public void addProject(String name){
         taskAgency.addNewProject(this, name);
