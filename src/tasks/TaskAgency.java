@@ -1,6 +1,8 @@
 package tasks;
 
 import application.ApplicationContext;
+import exceptions.NoTaskProjectException;
+import exceptions.ParametersException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,17 +15,18 @@ public class TaskAgency {
         projects.put(name, new Project(name));
     }
 
-    public void addNewTask(String projectName, String description){
+    public void addNewTask(String projectName, String description) throws NoTaskProjectException{
+        if(!projects.containsKey(projectName)) throw new NoTaskProjectException("No such project " + projectName);
         projects.get(projectName).addTask(TaskFactory.createNewTask(description));
     }
 
-    public void removeTask(long id){
+    public void removeTask(long id) throws NoTaskProjectException{
         for(Project p: projects.values()){
             p.removeTask(id);
         }
     }
 
-    public void addNewSubTask(long id, String description){
+    public void addNewSubTask(long id, String description) throws NoTaskProjectException{
         Task t = findTaskById(id);
         if(t != null){
             t.addTask(TaskFactory.createNewTask(description));
@@ -38,35 +41,35 @@ public class TaskAgency {
         return projects.get(name);
     }
 
-    public void setTaskDone(long id, boolean isDone){
+    public void setTaskDone(long id, boolean isDone) throws NoTaskProjectException{
         Task t = findTaskById(id);
         if(t != null){
             t.setDone(isDone);
         }
     }
 
-    public void addDeadline(long id, String deadline){
+    public void addDeadline(long id, String deadline) throws NoTaskProjectException {
         Task t = findTaskById(id);
         if(t != null){
             t.setDeadline(deadline);
         }
     }
 
-    public Task findTaskById(long id){
+    public Task findTaskById(long id) throws NoTaskProjectException {
         Task t;
         for(Project p: projects.values()){
              t = p.getTask(id);
              if(t != null) return t;
         }
-        return null;
+        throw new NoTaskProjectException("No such task id = " + id);
     }
 
-    public void listTasks(boolean showId){
+    public void listTasks(boolean showId, boolean today) throws ParametersException, NoTaskProjectException {
         StringBuilder builder = new StringBuilder("list ");
         for (Map.Entry<String, Project> p : projects.entrySet()) {
             builder.append(p.getKey()).append("\n");
             for(Task t :p.getValue().getTasks()){
-                builder.append(t.listTasks(1, showId));
+                builder.append(t.listTasks(1, showId, today));
             }
         }
         ApplicationContext.getInstance().getMediator().notify(this, builder.toString());

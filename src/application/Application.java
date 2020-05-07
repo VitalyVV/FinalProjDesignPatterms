@@ -19,7 +19,7 @@ public class Application {
         context.addCommand("deadline", new DeadlineCommand());
         context.addCommand("remove", new RemoveCommand());
         context.addCommand("help", new HelpCommand());
-        context.addCommand("err", new ErrorCommand());
+        context.addCommand("today", new TodayCommand());
     }
 
     public void run(){
@@ -43,13 +43,9 @@ public class Application {
         Command c = commands.getOrDefault(params[0], null);
 
         if (c != null){
-            try{
-                c.execute(command);
-            }catch (ArrayIndexOutOfBoundsException e){
-                commands.get("err").execute(command);
-            }
+            c.execute(command);
         }else{
-            commands.get("err").execute(command);
+            new ErrorCommand().execute(command);;
         }
     }
 

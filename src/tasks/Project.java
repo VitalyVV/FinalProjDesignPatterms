@@ -37,9 +37,11 @@ public class Project {
     }
 
     public void removeTask(long id){
-        for(Task t: taskList) {
-            if (t.getId() == id) taskList.remove(t);
-            t.removeSubTask(id);
+        for(int i = 0; i < taskList.size(); i++) {
+            taskList.get(i).removeSubTask(id);
+            if (taskList.get(i).getId() == id) {
+                taskList.remove(i);
+            }
         }
     }
     

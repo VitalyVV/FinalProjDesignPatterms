@@ -53,10 +53,10 @@ public class Task {
      * @param date - Deadline in form dd.mm.yy, else error is unavoidable.
      */
     public void setDeadline(String date){
-        String[] temp = date.split(".");
+        String[] temp = date.split("\\.");
         Calendar datetime = new GregorianCalendar();
-        datetime.set(Calendar.YEAR, Integer.parseInt(temp[2]));
-        datetime.set(Calendar.MONTH, Integer.parseInt(temp[1]));
+        datetime.set(Calendar.YEAR, Integer.parseInt(temp[2])+2000);
+        datetime.set(Calendar.MONTH, Integer.parseInt(temp[1])-1);
         datetime.set(Calendar.DATE, Integer.parseInt(temp[0]));
         this.deadline = datetime;
     }
@@ -68,23 +68,41 @@ public class Task {
     }
 
     public void removeSubTask(long id){
-        for(Task t: subTasks){
-            if(t.id == id) subTasks.remove(t);
+        for(int i = 0; i < subTasks.size(); i++){
+            if(subTasks.get(i).id == id) {
+                subTasks.remove(i);
+            }
         }
     }
 
-    public String listTasks(int depth, boolean showId){
+    public String listTasks(int depth, boolean showId, boolean today){
         StringBuilder builder = new StringBuilder();
-        for(int  i = 0; i < depth; i++){
-            builder.append("  ");
+        if(!today || isToday()) {
+            for (int i = 0; i < depth; i++) {
+                builder.append("  ");
+            }
+            builder.append("[").append(isDone() ? "x" : "").append("] ").append(description);
+            if (showId) builder.append("(id:").append(id).append(")");
+            builder.append("\n");
         }
-        builder.append("[").append(isDone()?"x":"").append("] ").append(description);
-        if(showId) builder.append("(id:").append(id).append(")");
-        builder.append("\n");
         for (Task sub:subTasks) {
-            builder.append(sub.listTasks(depth+1, showId));
+            builder.append(sub.listTasks(depth+1, showId, today));
         }
         return builder.toString();
     }
 
+    private boolean isToday(){
+        Calendar datetime = new GregorianCalendar();
+        if(datetime.get(Calendar.DATE) != deadline.get(Calendar.DATE))
+            return false;
+        if(datetime.get(Calendar.MONTH) != deadline.get(Calendar.MONTH)) {
+            return false;
+        }
+        if(datetime.get(Calendar.YEAR) != deadline.get(Calendar.YEAR)) {
+            System.out.println(datetime.get(Calendar.YEAR));
+            System.out.println(deadline.get(Calendar.YEAR));
+            return false;
+        }
+        return true;
+    }
 }
