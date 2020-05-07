@@ -5,13 +5,17 @@ import commands.ErrorCommand;
 import commands.HelpCommand;
 import commands.tasks.*;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
-public class Application {
+public class Application implements Runnable{
 
-    public Application() {
+    public Application(BufferedReader in, PrintWriter out) {
         ApplicationContext context = ApplicationContext.getInstance();
+        context.setIn(in);
+        context.setOut(out);
         context.addCommand("add", new AddCommand());
         context.addCommand("show", new ShowCommand());
         context.addCommand("check", new CheckCommand());
@@ -22,6 +26,7 @@ public class Application {
         context.addCommand("today", new TodayCommand());
     }
 
+    @Override
     public void run(){
         while(true){
             ApplicationContext.getInstance().write("> ");

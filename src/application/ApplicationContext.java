@@ -54,8 +54,8 @@ public class ApplicationContext {
     }
 
     private static ApplicationContext instance;
-    private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    private PrintWriter out = new PrintWriter(System.out);
+    private BufferedReader in;
+    private PrintWriter out;
 
     private HashMap<String, Command> commands = new HashMap<>();
     private Mediator taskMediator = new TaskMediator();

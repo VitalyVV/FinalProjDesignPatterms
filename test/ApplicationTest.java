@@ -1,3 +1,4 @@
+import application.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        TaskListOriginal taskList = new TaskListOriginal(in, out);
+        Application taskList = new Application(in, out);
         applicationThread = new Thread(taskList);
     }
 
