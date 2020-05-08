@@ -27,15 +27,6 @@ namespace commands{
             + description()
         }
 
-        class commands.tasks.AddProjectCommand {
-            + description()
-        }
-
-
-        class commands.tasks.AddTaskCommand {
-            + description()
-        }
-
 
 
         class commands.tasks.CheckCommand {
@@ -70,8 +61,7 @@ namespace commands{
  }
 
   commands.tasks.AddCommand -up-|> commands.tasks.TaskCommand
-  commands.tasks.AddProjectCommand -up-|> commands.tasks.TaskCommand
-  commands.tasks.AddTaskCommand -up-|> commands.tasks.TaskCommand
+
   commands.tasks.CheckCommand -up-|> commands.tasks.TaskCommand
   commands.tasks.DeadlineCommand -up-|> commands.tasks.TaskCommand
   commands.tasks.RemoveCommand -up-|> commands.tasks.TaskCommand
