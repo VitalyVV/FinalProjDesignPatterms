@@ -33,11 +33,16 @@ public class TaskMediator implements Mediator {
         String[] params = data.split(" ");
         switch (params[0]) {
             case "add":
-                if (params.length > 3)
-                    add(params[1], params[3], params[2]);
-                else
-                    if(params.length < 3) throw new ParametersException("Missing parameters for add command.");
-                    add(params[1], params[2], null);
+                if(params.length > 4){
+                    if(params[2].equals("-e")) {
+                        add(params[1], params[4], params[3], true);
+                    }else throw new ParametersException("Wrong parameters for add command.");
+                }else if (params.length > 3)
+                    add(params[1], params[3], params[2], false);
+                else {
+                    if (params.length < 3) throw new ParametersException("Missing parameters for add command.");
+                    add(params[1], params[2], null, false);
+                }
                 break;
             case "deadline":
                 if(params.length < 3) throw new ParametersException("Missing parameters for deadline command.");
@@ -70,16 +75,18 @@ public class TaskMediator implements Mediator {
         }
     }
 
-    private void add(String type, String title, String parent) throws NoTaskProjectException, ParametersException {
+    private void add(String type, String title, String parent, boolean existing) throws NoTaskProjectException, ParametersException {
         switch (type) {
             case "project":
                 addProject(title);
                 break;
             case "task":
-                addTask(title, parent);
+                if(existing) addTask(Long.parseLong(title), parent);
+                else addTask(title, parent);
                 break;
             case "subtask":
-                addSubTask(title, Long.parseLong(parent));
+                if(existing) addSubTask(Long.parseLong(title), Long.parseLong(parent));
+                else addSubTask(title, Long.parseLong(parent));
                 break;
             default: throw new ParametersException("No such subcommand for add");
         }
@@ -96,6 +103,10 @@ public class TaskMediator implements Mediator {
 
     public void addTask(String description, String projectName) throws NoTaskProjectException {
         taskAgency.addNewTask(projectName, description);
+    }
+
+    public void addTask(long task, String projectName) throws NoTaskProjectException {
+        taskAgency.addTask(projectName, task);
     }
 
     public void removeTask(long id) throws NoTaskProjectException {
@@ -116,5 +127,9 @@ public class TaskMediator implements Mediator {
 
     public void addSubTask(String description, long id) throws NoTaskProjectException {
         taskAgency.addNewSubTask(id, description);
+    }
+
+    public void addSubTask(long taskId, long parentId) throws NoTaskProjectException {
+        taskAgency.addSubTask(parentId, taskId);
     }
 }

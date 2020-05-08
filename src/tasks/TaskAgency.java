@@ -20,6 +20,14 @@ public class TaskAgency {
         projects.get(projectName).addTask(TaskFactory.createNewTask(description));
     }
 
+    public void addTask(String projectName, long id) throws NoTaskProjectException{
+        if(!projects.containsKey(projectName)) throw new NoTaskProjectException("No such project " + projectName);
+        Task t = findTaskById(id);
+        if(t == null) throw new NoTaskProjectException("Task is not found.");
+        projects.get(projectName).addTask(t);
+
+    }
+
     public void removeTask(long id) throws NoTaskProjectException{
         for(Project p: projects.values()){
             p.removeTask(id);
@@ -30,7 +38,16 @@ public class TaskAgency {
         Task t = findTaskById(id);
         if(t != null){
             t.addTask(TaskFactory.createNewTask(description));
-        }
+        }else throw new NoTaskProjectException("Task is not found.");
+    }
+
+
+    public void addSubTask(long parentId, long taskId) throws NoTaskProjectException{
+        Task t = findTaskById(parentId);
+        Task t2 = findTaskById(taskId);
+        if(t != null && t2 != null){
+            t.addTask(t2);
+        }else throw new NoTaskProjectException("Task is not found.");
     }
 
     public Project[] getProjects(){
